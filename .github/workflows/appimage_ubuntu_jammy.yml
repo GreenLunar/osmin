@@ -1,0 +1,50 @@
+name: appimage_amd64
+on:
+  push:
+    branches: [ dev/1.9 ]
+  pull_request:
+    branches: [ dev/1.9 ]
+
+jobs:
+  build-appimage:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: "sudo apt-get update && sudo apt-get install -y cmake
+              qtbase5-dev qttools5-dev qttools5-dev-tools qtdeclarative5-dev
+              qtdeclarative5-dev-tools qtquickcontrols2-5-dev libqt5svg5-dev
+              libqt5remoteobjects5-dev libqt5sensors5-dev qtmultimedia5-dev
+              qtpositioning5-dev libomp-dev liblzma-dev libxml2-dev
+              qml-module-qt-labs-settings qml-module-qtgraphicaleffects
+              qml-module-qtqml-models2 qml-module-qtquick2 qml-module-qtquick-controls2
+              qml-module-qtquick-layouts qml-module-qtquick-particles2
+              qml-module-qtquick-templates2 qml-module-qtquick-window2
+              libqt5remoteobjects5-bin libqt5positioning5 libqt5svg5
+              zlib1g-dev libssl-dev libpulse-dev libdbus-1-dev libqt5dbus5"
+
+      - name: Init submodules
+        run: git submodule init && git submodule update
+
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr .
+
+      - name: Build
+        run: cd build && make -j`nproc` install DESTDIR=../AppDir
+
+      - name: Download AppImage builder
+        run: |
+          sudo apt-get install -y binutils coreutils desktop-file-utils fakeroot fuse libgdk-pixbuf2.0-dev patchelf python3-pip python3-setuptools squashfs-tools strace util-linux zsync 
+          wget -O appimage-builder-x86_64.AppImage https://github.com/AppImageCrafters/appimage-builder/releases/download/v1.1.0/appimage-builder-1.1.0-x86_64.AppImage
+          chmod +x appimage-builder-x86_64.AppImage
+
+      - name: Build AppImage
+        run: ./appimage-builder-x86_64.AppImage --recipe appimage/builder_ubuntu_22.04.yml
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: AppImage
+          path: './*.AppImage*'
+          retention-days: 5

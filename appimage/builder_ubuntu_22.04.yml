@@ -1,0 +1,138 @@
+version: 1
+AppDir:
+  path: AppDir
+  app_info:
+    id: osmin
+    name: osmin
+    icon: osmin
+    version: latest
+    exec: usr/bin/osmin
+    exec_args: $@
+  apt:
+    arch:
+    - amd64
+    allow_unauthenticated: true
+    sources:
+    - sourceline: deb http://fr.archive.ubuntu.com/ubuntu/ jammy main restricted
+    - sourceline: deb http://fr.archive.ubuntu.com/ubuntu/ jammy-updates main restricted
+    - sourceline: deb http://fr.archive.ubuntu.com/ubuntu/ jammy universe
+    - sourceline: deb http://fr.archive.ubuntu.com/ubuntu/ jammy-updates universe
+    - sourceline: deb http://fr.archive.ubuntu.com/ubuntu/ jammy multiverse
+    - sourceline: deb http://fr.archive.ubuntu.com/ubuntu/ jammy-updates multiverse
+    - sourceline: deb http://fr.archive.ubuntu.com/ubuntu/ jammy-backports main restricted
+        universe multiverse
+    - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security main restricted
+    - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security universe
+    - sourceline: deb http://security.ubuntu.com/ubuntu jammy-security multiverse
+    include:
+    - libc6:amd64
+    - libbz2-1.0
+    - libexpat1
+    - libfam0
+    - libgcrypt20
+    - liblz4-1
+    - libpciaccess0
+    - libpcre3
+    - libsm6
+    - libsystemd0
+    - libxau6
+    - libxcb-render-util0
+    - libxcb-sync1
+    - libxcb-xinerama0
+    - libxcb-xkb1
+    - libxdamage1
+    - libxdmcp6
+    - libxext6
+    - libxfixes3
+    - libxrender1
+    - libxshmfence1
+    - libxxf86vm1
+    - libqt5core5a
+    - libqt5concurrent5
+    - libqt5gui5
+    - libqt5qml5
+    - libqt5qmlmodels5
+    - libqt5qmlworkerscript5
+    - libqt5multimedia5
+    - libqt5multimediaquick5
+    - libqt5network5
+    - libqt5positioning5
+    - libqt5positioningquick5
+    - libqt5quick5
+    - libqt5quickcontrols2-5
+    - libqt5quicktemplates2-5
+    - libqt5quickparticles5
+    - libqt5quickwidgets5
+    - libqt5remoteobjects5
+    - libqt5sensors5
+    - libqt5dbus5
+    - libqt5opengl5
+    - libqt5svg5
+    - libqt5widgets5
+    - libqt5x11extras5
+    - libqt5xml5
+    - libqt5multimedia5-plugins
+    - libqt5positioning5-plugins
+    - qml-module-qt-labs-settings
+    - qml-module-qtgraphicaleffects
+    - qml-module-qtqml-models2
+    - qml-module-qtquick2
+    - qml-module-qtquick-controls2
+    - qml-module-qtquick-layouts
+    - qml-module-qtquick-particles2
+    - qml-module-qtquick-templates2
+    - qml-module-qtquick-window2
+    - qml-module-qtpositioning
+    - qml-module-qtsensors
+    - qttranslations5-l10n
+    - qtwayland5
+    - libqt5x11extras5
+    - libomp5-12
+    - zlib1g
+    - lzma
+    - libxml2
+    - libssl3
+    - libdbus-1-3
+    - dbus-x11
+    - geoclue-2.0
+    - libglib2.0-0
+    - libgstreamer1.0-0
+    - gstreamer1.0-plugins-base
+    - libgirepository-1.0-1
+    - gstreamer1.0-plugins-good
+    - gstreamer1.0-plugins-ugly
+    - gstreamer1.0-plugins-bad
+    - gstreamer1.0-alsa
+    - gstreamer1.0-pulseaudio
+    - gstreamer1.0-libav
+    - gir1.2-gstreamer-1.0
+    - gir1.2-gst-plugins-base-1.0
+    - gir1.2-glib-2.0
+    - libportmidi0
+    - alsa-utils
+    - libpulse0
+    - libffi8
+    exclude:
+    - hicolor-icon-theme
+    - sound-theme-freedesktop
+    - perl
+    - perl-base
+    - kwayland-data
+    - libwacom2
+    - libasound2
+    - breeze
+    - breeze-icon-theme
+    - breeze-cursor-theme
+    - kwin-style-breeze
+    - kde-style-breeze
+    - plasma-integration
+  files:
+    exclude:
+    - usr/share/man
+    - usr/share/doc/*/README.*
+    - usr/share/doc/*/changelog.*
+    - usr/share/doc/*/NEWS.*
+    - usr/share/doc/*/TODO.*
+AppImage:
+  arch: x86_64
+  update-information: gh-releases-zsync|AppImageCrafters|osmin|latest|*x86_64.AppImage.zsync
