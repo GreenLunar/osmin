@@ -6,6 +6,7 @@
 - Qt Creator 6.0
 
 - Qt = 5.15 : Android NDK 22.1.7171670
+  sdkmanager --install "ndk;22.1.7171670"
 
 ### Configure the build:
 
