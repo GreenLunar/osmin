@@ -75,4 +75,22 @@ DialogBase {
         onLinkActivated: Qt.openUrlExternally(link)
         linkColor: styleMap.view.linkColor
     }
+
+    Text {
+        color: styleMap.dialog.foregroundColor
+        width: dialog.availableWidth
+        text: qsTr("The following options are intended for debugging the application. Please do not enable them under normal use to preserve the battery life of the device.")
+        wrapMode: Label.Wrap
+        font.pointSize: units.fs("medium")
+    }
+    MapCheckBox {
+        id: debug
+        width: parent.width
+        color: styleMap.popover.foregroundColor
+        text: qsTr("Enable debug logging")
+        checked: mapSettings.debugLevel > 0
+        onClicked: {
+            mapSettings.debugLevel = (mapSettings.debugLevel === 0 ? 2 : 0);
+        }
+    }
 }

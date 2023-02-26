@@ -108,7 +108,7 @@ ApplicationWindow {
     }
 
     // Variables
-    property int debugLevel: 2          // My debug level
+    property int debugLevel: 0          // My debug level
     property bool startup: true         // is running the cold startup ?
 
     // Property to store the state of the application (active or suspended)
